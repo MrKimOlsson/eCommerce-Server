@@ -13,7 +13,9 @@ app.use(express.json());    // Formats data to Json
 
 // Import and use routes
 const productRouter = require('./routes/products');
+const orderRouter = require('./routes/orders');
 app.use('/products', productRouter);
+app.use('/orders', orderRouter);
 
 // Connect to your own DB
 mongoose.connect(

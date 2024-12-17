@@ -1,0 +1,31 @@
+const mongoose = require('mongoose');
+
+const OrderSchema = mongoose.Schema({
+    shippingData: {
+        firstName: String,
+        lastName: String,
+        postalCode: String,
+        addressLine1: String,
+        addressLine2: String,
+        province: String,
+        country: String,
+        phone: String,
+        email: String,
+        deliveryMethod: String,
+        newsLetter: Boolean,
+        privacyConsent: Boolean,
+    },
+    paymentData: {
+        cardInfo: String,
+        cardDate: String,
+        cvc: String,
+        nameOnCard: String
+    },
+    cartData: [new mongoose.Schema({
+        productId: mongoose.Types.ObjectId,
+        quantity: Number,
+        price: Number,
+    })]
+});
+
+module.exports = mongoose.model('Orders', OrderSchema);
