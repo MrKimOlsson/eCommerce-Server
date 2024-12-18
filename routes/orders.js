@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
             const cartDataEntry = req.body.cartData.find((data) => data.productId === p._id.toString())
             const foundStockIdx = p.stock.findIndex((s) => s.size === cartDataEntry.size)
 
-            p.stock[foundStockIdx].quantity -= cartDataEntry
+            p.stock[foundStockIdx].quantity -= cartDataEntry.quantity
 
             p.markModified('stock')
             p.save()
