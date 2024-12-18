@@ -3,6 +3,14 @@ const router = express.Router();
 const Products = require('../models/Product');
 const Order = require('../models/Order');
 
+router.get('/', async (req, res) => {
+    try {
+        res.json(await Order.find());
+    } catch(error) {
+        res.json({message: error});
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const productIds = req.body.cartData.map((data) => data.productId)
