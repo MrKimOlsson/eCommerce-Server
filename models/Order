@@ -2,29 +2,30 @@ const mongoose = require('mongoose');
 
 const OrderSchema = mongoose.Schema({
     shippingData: {
-        firstName: String,
-        lastName: String,
-        postalCode: String,
-        addressLine1: String,
-        addressLine2: String,
-        province: String,
-        country: String,
-        phone: String,
-        email: String,
-        deliveryMethod: String,
-        newsLetter: Boolean,
-        privacyConsent: Boolean,
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        postalCode: { type: String, required: true },
+        addressLine1: { type: String, required: true },
+        addressLine2: { type: String, required: true },
+        province: { type: String, required: true },
+        country: { type: String, required: true },
+        phone: { type: String, required: true },
+        email: { type: String, required: true },
+        deliveryMethod: { type: String, required: true },
+        newsLetter: { type: Boolean, required: true },
+        privacyConsent: { type: Boolean, required: true },
     },
     paymentData: {
-        cardInfo: String,
-        cardDate: String,
-        cvc: String,
-        nameOnCard: String
+        cardInfo: { type: String, required: true },
+        cardDate: { type: String, required: true },
+        cvc: { type: String, required: true },
+        nameOnCard: { type: String, required: true }
     },
     cartData: [new mongoose.Schema({
         productId: mongoose.Types.ObjectId,
-        quantity: Number,
-        price: Number,
+        quantity: { type: Number, required: true },
+        price: { type: Number, required: true },
+        size: { type: String, required: true },
     })]
 });
 
