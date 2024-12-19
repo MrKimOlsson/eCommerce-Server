@@ -3,6 +3,14 @@ const router = express.Router();
 const Products = require('../models/Product');
 const Order = require('../models/Order');
 
+router.get('/', async (req, res) => {
+    try {
+        res.json(await Order.find());
+    } catch(error) {
+        res.json({message: error});
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const productIds = req.body.cartData.map((data) => data.productId)
@@ -12,7 +20,7 @@ router.post('/', async (req, res) => {
             const cartDataEntry = req.body.cartData.find((data) => data.productId === p._id.toString())
             const foundStockIdx = p.stock.findIndex((s) => s.size === cartDataEntry.size)
 
-            p.stock[foundStockIdx].quantity -= 1
+            p.stock[foundStockIdx].quantity -= cartDataEntry.quantity
 
             p.markModified('stock')
             p.save()
